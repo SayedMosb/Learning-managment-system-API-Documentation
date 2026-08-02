@@ -5,7 +5,7 @@ const router = express.Router();
 const {addWishlist,getWishlist ,updatedWishlist,deletedWishlist}=require('../controller/Wishlist.controle');
 
 const vertifyToken = require('../vertifyToken');
-
+const allowedTo =require('../allowedTo');
 /**
  * @swagger
  * /api/wishlist:
@@ -30,7 +30,7 @@ const vertifyToken = require('../vertifyToken');
  *         description: Course added to wishlist successfully
  */
 
-router.post('/',vertifyToken,addWishlist);
+router.post('/',vertifyToken,allowedTo("student"),addWishlist);
 /**
  * @swagger
  * /api/wishlist:
@@ -44,7 +44,7 @@ router.post('/',vertifyToken,addWishlist);
  *       200:
  *         description: Wishlist fetched successfully
  */
-router.get('/',vertifyToken,getWishlist);
+router.get('/',vertifyToken,allowedTo("student"),getWishlist);
 /**
  * @swagger
  * /api/wishlist/{id}:
@@ -71,7 +71,7 @@ router.get('/',vertifyToken,getWishlist);
  *       200:
  *         description: Wishlist updated successfully
  */
-router.put('/:id',vertifyToken,updatedWishlist);
+router.put('/:id',vertifyToken,allowedTo("student"),updatedWishlist);
 /**
  * @swagger
  * /api/wishlist/{id}:
@@ -91,6 +91,6 @@ router.put('/:id',vertifyToken,updatedWishlist);
  *       200:
  *         description: Wishlist deleted successfully
  */
-router.delete('/:id',vertifyToken,deletedWishlist);
+router.delete('/:id',vertifyToken,allowedTo("student"),deletedWishlist);
 
 module.exports = router;

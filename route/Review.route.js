@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-
+const allowedTo=require('../allowedTo')
 const {getReview,addReview,updateReview,deletedReview}=require('../controller/rewiew.controller');
 const verifyToken =require('../vertifyToken');
 /**
@@ -31,7 +31,11 @@ const verifyToken =require('../vertifyToken');
  *       201:
  *         description: Review added successfully
  */
-router.post('/',addReview);
+router.post('/',
+verifyToken,
+allowedTo("student"),
+addReview
+);
 /**
  * @swagger
  * /api/reviews/{id}:

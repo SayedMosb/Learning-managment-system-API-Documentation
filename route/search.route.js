@@ -1,6 +1,7 @@
 const express =require('express');
 const router = express.Router();
-
+const vertifyToken =require('../vertifyToken');
+const allowedTo =require('../allowedTo');
 
 const {searching}=require('../features/searching')
 /**
@@ -27,7 +28,7 @@ const {searching}=require('../features/searching')
  *         description: Course not found
  */
 
-router.get('/',searching);
+router.get('/',vertifyToken,searching);
 
 
 

@@ -1,7 +1,7 @@
 const express =require('express');
 const router =express.Router();
-
-
+const allowedTo =require('../allowedTo')
+const vertifyToken =require('../vertifyToken');
 
 const {getAllCourse
 ,getCourseAndUpdated,
@@ -96,7 +96,7 @@ router.get('/:id', getCourseById);
  *       201:
  *         description: Course created
  */
-router.post('/',upload.single('Image'),addCourse);
+router.post('/',vertifyToken,allowedTo("admin","instructor"),upload.single('Image'),addCourse);
 /**
  * @swagger
  * /api/course/{id}:
@@ -134,7 +134,7 @@ router.post('/',upload.single('Image'),addCourse);
  *       200:
  *         description: Course updated successfully
  */
-router.put('/:id',upload.single('Image'), getCourseAndUpdated);
+router.put('/:id',vertifyToken,allowedTo("admin","instructor"),upload.single('Image'), getCourseAndUpdated);
 /**
  * @swagger
  * /api/course/{id}:
@@ -152,7 +152,7 @@ router.put('/:id',upload.single('Image'), getCourseAndUpdated);
  *       200:
  *         description: Course deleted successfully
  */
-router.delete('/:id',deledtedCourse);
+router.delete('/:id',vertifyToken,allowedTo("admin","instructor"),deledtedCourse);
 
 
 module.exports =router;

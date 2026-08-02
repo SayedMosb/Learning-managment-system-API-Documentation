@@ -7,7 +7,8 @@ const {
     Updatedlesson,
     deletedlesson
 } = require('../controller/lesson.controller');
-
+const vertfyToken =require('../vertifyToken');
+const allowedTo =require('../allowedTo');
 const multer = require('multer');
 const path = require('path');
 
@@ -82,6 +83,8 @@ const upload = multer({
  */
 router.post(
     '/',
+    vertfyToken,
+    allowedTo("admin","instructor"),
     upload.fields([
         { name: 'Video', maxCount: 1 },
         { name: 'PDF', maxCount: 1 }
@@ -99,7 +102,7 @@ router.post(
  *       200:
  *         description: Lessons fetched successfully
  */
-router.get('/', getAlllesson);
+router.get('/',vertfyToken, getAlllesson);
 /**
  * @swagger
  * /api/lesson/{id}:
@@ -136,6 +139,8 @@ router.get('/', getAlllesson);
  */
 router.put(
     '/:id',
+    vertfyToken,
+    allowedTo("admin","instructor"),
     upload.fields([
         { name: 'Video', maxCount: 1 },
         { name: 'File', maxCount: 1 }
@@ -159,6 +164,9 @@ router.put(
  *       200:
  *         description: Lesson deleted successfully
  */
-router.delete('/:id', deletedlesson);
+router.delete('/:id',
+    vertfyToken,
+    allowedTo("admin","instructor"),
+     deletedlesson);
 
 module.exports = router;

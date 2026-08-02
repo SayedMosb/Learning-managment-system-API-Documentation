@@ -1,6 +1,7 @@
 const express =require('express');
 const router = express.Router();
-
+const vertfiyToken=require('../vertifyToken');
+const allowedTo =require('../allowedTo')
 
 const {getMyCourse,GetStudentinCourse,addCourse}=require('../controller/enrollments.cont');
 
@@ -15,7 +16,7 @@ const {getMyCourse,GetStudentinCourse,addCourse}=require('../controller/enrollme
  *       200:
  *         description: Student courses fetched successfully
  */
-router.get('/my-course',getMyCourse);
+router.get('/my-course',vertfiyToken, allowedTo("student"),getMyCourse);
 /**
  * @swagger
  * /api/enrollments/{id}:
@@ -34,7 +35,7 @@ router.get('/my-course',getMyCourse);
  *       200:
  *         description: Students fetched successfully
  */
-router.get('/:id',GetStudentinCourse);
+router.get('/:id',vertfiyToken,allowedTo("admin","instructor"),GetStudentinCourse);
 /**
  * @swagger
  * /api/enrollments:
@@ -60,6 +61,6 @@ router.get('/:id',GetStudentinCourse);
  *         description: Student enrolled successfully
  */
 
-router.post('/',addCourse);
+router.post('/',vertfiyToken,allowedTo("student"),addCourse);
 
 module.exports =router;

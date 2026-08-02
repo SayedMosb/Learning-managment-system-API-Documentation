@@ -26,7 +26,7 @@ const validator = require('validator');
       }
       ,role:{
         type:String,
-        enum:["admin","instractor","student"],
+        enum:["admin","instructor","student"],
         default:"student"
       }
  })

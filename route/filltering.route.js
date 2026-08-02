@@ -1,6 +1,7 @@
 const express =require('express');
 const router =express.Router();
-
+const verifyToken =require('../vertifyToken');
+const allowedTo = require('../allowedTo');
 const{filltering}=require('../features/Filltering');
 /**
  * @swagger
@@ -26,5 +27,5 @@ const{filltering}=require('../features/Filltering');
  *         description: No courses found in this category
  */
 
-router.get('/',filltering);
+router.get('/',verifyToken,filltering);
 module.exports=router;

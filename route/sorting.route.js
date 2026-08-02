@@ -1,6 +1,6 @@
 const express =require('express');
 const router =express.Router();
-
+const verifyToken =require('../vertifyToken');
 
 const {sorting}=require('../features/sorting');
 /**
@@ -25,6 +25,6 @@ const {sorting}=require('../features/sorting');
  *         description: Sort value is required
  */
 
-router.get('/',sorting);
+router.get('/',verifyToken,sorting);
 
 module.exports=router;

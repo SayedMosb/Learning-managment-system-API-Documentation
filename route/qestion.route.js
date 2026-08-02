@@ -1,7 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-
+const allowedTo =require('../allowedTo');
+const verifyToken =require('../vertifyToken');
 const {
     addQuestin,
     getQuestionById,
@@ -38,7 +39,7 @@ const {
  *       201:
  *         description: Question created successfully
  */
-router.post('/', addQuestin);
+router.post('/',verifyToken,allowedTo("admin","instructor"),addQuestin);
 /**
  * @swagger
  * /api/question:
@@ -50,7 +51,12 @@ router.post('/', addQuestin);
  *       200:
  *         description: Questions fetched successfully
  */
-router.get('/', getALLquestion);
+router.get(
+ '/',
+ verifyToken,
+ allowedTo("admin","instructor"),
+ getALLquestion
+);
 /**
  * @swagger
  * /api/question/quiz/{quizId}:
@@ -68,7 +74,7 @@ router.get('/', getALLquestion);
  *       200:
  *         description: Questions fetched successfully
  */
-router.get('/quiz/:quizId', getQuestionsByQuiz);
+router.get('/quiz/:quizId',verifyToken, getQuestionsByQuiz);
 /**
  * @swagger
  * /api/question/{id}:
@@ -86,7 +92,7 @@ router.get('/quiz/:quizId', getQuestionsByQuiz);
  *       200:
  *         description: Question found
  */
-router.get('/:id', getQuestionById);
+router.get('/:id',verifyToken, getQuestionById);
 /**
  * @swagger
  * /api/question/{id}:
@@ -110,7 +116,7 @@ router.get('/:id', getQuestionById);
  *       200:
  *         description: Question updated successfully
  */
-router.put('/:id', updatedQuestion);
+router.put('/:id',verifyToken, allowedTo("admin","instructor"), updatedQuestion);
 /**
  * @swagger
  * /api/question/{id}:
@@ -128,6 +134,6 @@ router.put('/:id', updatedQuestion);
  *       200:
  *         description: Question deleted successfully
  */
-router.delete('/:id', deleteQuestion);
+router.delete('/:id',verifyToken,allowedTo("admin","instructor"), deleteQuestion);
 
 module.exports = router;

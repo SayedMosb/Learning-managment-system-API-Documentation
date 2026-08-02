@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const verifyToken=require('../vertifyToken')
+const verifyToken=require('../vertifyToken');
+const allowedTo=require('../allowedTo')
 const {submitted,getMyResults,getallresult}=require('../controller/QuizResult.controller');
 /**
  * @swagger
@@ -32,6 +33,7 @@ const {submitted,getMyResults,getallresult}=require('../controller/QuizResult.co
 router.post(
     "/submited",
     verifyToken,
+     allowedTo("student"),
     submitted
 );
 /**
@@ -47,7 +49,7 @@ router.post(
  *       200:
  *         description: Results fetched successfully
  */
-router.post('/my-result',verifyToken,getMyResults);
+router.post('/my-result',verifyToken, allowedTo("student"),getMyResults);
 /**
  * @swagger
  * /api/result:
@@ -59,7 +61,7 @@ router.post('/my-result',verifyToken,getMyResults);
  *       200:
  *         description: All results fetched successfully
  */
-router.get('/', getallresult);
+router.get('/',verifyToken,allowedTo("admin","instructor"), getallresult);
 
 
 module.exports =router;

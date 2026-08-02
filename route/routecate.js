@@ -1,6 +1,7 @@
 const express =require('express');
 const router = express.Router();
-
+const verifyToken =require('../vertifyToken');
+const allowedTo=require('../allowedTo');
 const {getallCategory,
     getallCategoryById,
     updatedCategory,
@@ -17,7 +18,7 @@ addcategory}=require('../controller/cattask');
  *       200:
  *         description: Categories fetched successfully
  */
-router.get('/categories',getallCategory);
+router.get('/categories',verifyToken,getallCategory);
 /**
  * @swagger
  * /api/categories/categories:
@@ -40,7 +41,7 @@ router.get('/categories',getallCategory);
  *         description: Category created successfully
  */
 
-router.post('/categories',addcategory);
+router.post('/categories',verifyToken,allowedTo("admin"),addcategory);
 /**
  * @swagger
  * /api/categories/categories/{id}:
@@ -59,7 +60,7 @@ router.post('/categories',addcategory);
  *         description: Category found successfully
  */
 
-router.get('/categories/:id',getallCategoryById);
+router.get('/categories/:id',verifyToken,getallCategoryById);
 /**
  * @swagger
  * /api/categories/categories/{id}:
@@ -87,7 +88,7 @@ router.get('/categories/:id',getallCategoryById);
  *         description: Category updated successfully
  */
 
-router.put('/categories/:id',updatedCategory);
+router.put('/categories/:id',verifyToken,allowedTo("admin"),updatedCategory);
 /**
  * @swagger
  * /api/categories/categories/{id}:
@@ -105,7 +106,7 @@ router.put('/categories/:id',updatedCategory);
  *       200:
  *         description: Category deleted successfully
  */
-router.delete('/categories/:id',deletedCategory);
+router.delete('/categories/:id',verifyToken,allowedTo("admin"),deletedCategory);
 
 
 module.exports =router;
