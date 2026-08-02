@@ -1,32 +1,42 @@
-## Features
+# Learning Management System (LMS)
 
-- User Authentication (JWT)
-- Course CRUD
-- Lesson Management
-- Enrollment System
-- Quiz System
+## 📌 About
+A RESTful API for a Learning Management System built with Node.js, Express.js, and MongoDB.
+
+## 🚀 Features
+- Authentication & Authorization (JWT)
+- Course Management
+- Categories
+- Lessons
+- Enrollments
+- Quiz & Results
 - Reviews
 - Wishlist
-- Search
-- Filtering
-- Pagination
-- Sorting
-- Dashboard
+- Search, Filter & Sorting
 - Swagger API Documentation
 
+## 🛠️ Technologies
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- Multer
+- Swagger
 
-## Project Structure
+## 📷 API Documentation
 
-controller/
-route/
-moduels/
-features/
+![Swagger](images/swagger-home.png)
 
+## ⚙️ Installation
 
-## Environment Variables
+```bash
+npm install
+npm start
+```
 
-Create .env file:
+## 📄 API Documentation
 
-MONGO_URL=
-JWT_SECRET=
-PORT=
+Open:
+
+http://localhost:4000/api-docs
