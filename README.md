@@ -26,7 +26,7 @@ A RESTful API for a Learning Management System built with Node.js, Express.js, a
 
 ## 📷 API Documentation
 
-![Swagger](images/swagger-home.png)
+![Swagger](Image/swagger-home.png)
 
 ## ⚙️ Installation
 
