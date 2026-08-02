@@ -1,21 +1,32 @@
-# LMS Backend
+## Features
 
-Learning Management System API
+- User Authentication (JWT)
+- Course CRUD
+- Lesson Management
+- Enrollment System
+- Quiz System
+- Reviews
+- Wishlist
+- Search
+- Filtering
+- Pagination
+- Sorting
+- Dashboard
+- Swagger API Documentation
 
-## Technologies
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- JWT
-- Swagger
 
-## Run Project
+## Project Structure
 
-npm install
+controller/
+route/
+moduels/
+features/
 
-npm start
 
-## API Documentation
+## Environment Variables
 
-/api-docs
+Create .env file:
+
+MONGO_URL=
+JWT_SECRET=
+PORT=
